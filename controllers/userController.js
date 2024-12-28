@@ -45,7 +45,7 @@ export const loginController = async (req, res) => {
         const token = await user.generateJWT();
         res.status(200).json({ user, token });
     } catch (error) {
-        res.status(500).send(error.message); // Corrected to 500 Internal Server Error
+        res.status(500).send(error.message);
     }
 };
 
