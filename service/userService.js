@@ -1,8 +1,8 @@
 import dbmodels from "../models/dbmodels.js";
 
 export const createUser = async ({ email, password }) => {
-  if (!email || password) {
-    throw new error("email and password required!");
+  if (!email || !password) { // Fix the condition
+    throw new Error("Email and password are required!"); // Use `Error` instead of `error`
   }
 
   const hashPassword = await dbmodels.hashPassword(password);
@@ -14,4 +14,3 @@ export const createUser = async ({ email, password }) => {
 
   return user;
 };
-
