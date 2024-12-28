@@ -30,4 +30,11 @@ router.get('/profile',
     ]
 )
 
+router.get('/logout',
+    [
+        authMiddleware.authUser,
+        userController.logoutController
+    ]
+)
+
 export default router;

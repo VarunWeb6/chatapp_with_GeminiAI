@@ -1,6 +1,7 @@
 import dbmodels from '../models/dbmodels.js';
 import * as userService from '../service/userService.js';
 import { validationResult } from 'express-validator';
+import redisClient from '../service/redisService.js';
 
 // Controller to create a new user
 export const createUserController = async (req, res) => {
@@ -67,3 +68,20 @@ export const profileController = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+export const logoutController = async (req, res) => {
+    try {
+        // Assuming token is stored in cookies
+        const token = req.cookies.token || req.headers.authorization.split(' ')[1];
+
+        //logout the user by setting the token in Redis with an expiry time
+        redisClient.set(token, 'logout', 'EX', 60 * 60 * 24, (err, reply) => {
+            if (err) {
+                return res.status(500).json({ error: 'Internal Server Error' });
+            }
+            res.status(200).json({ message: 'Logged out successfully' });
+        });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
