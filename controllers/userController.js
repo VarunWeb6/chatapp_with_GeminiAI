@@ -16,6 +16,7 @@ export const createUserController = async (req, res) => {
 
         // Assuming generateJWT() is defined and creates a JWT token
         const token = await user.generateJWT();
+        delete user._doc.password;
         res.status(201).json({ user, token });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -44,7 +45,7 @@ export const loginController = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
-
+        delete user._doc.password;
         // Generate JWT token
         const token = await user.generateJWT();
         res.status(200).json({ user, token });

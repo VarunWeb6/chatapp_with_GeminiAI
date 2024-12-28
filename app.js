@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import connect from './db/db.js';
 import userRoutes from './routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
+import cors from 'cors'
 
 // Initialize Database Connection
 try {
@@ -16,6 +17,12 @@ try {
 const app = express();
 
 // Middleware
+app.use(
+    cors({
+        origin: 'http://localhost:5173', // Allow frontend URI
+        credentials: true, // Enable credentials for cookie handling
+    })
+);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
