@@ -43,7 +43,8 @@ export const getAllProjects = async (req, res) => {
       userId: loggedInUser._id,
     });
 
-    return res.status(200).json(allUserProjects);
+    // Return the projects wrapped in an object with a `project` key
+    return res.status(200).json(allUserProjects); // allUserProjects is already { project: [...] }
   } catch (error) {
     console.error("Error fetching all projects:", error);
     return res.status(500).json({ error: error.message });

@@ -36,7 +36,7 @@ export const getAllProjectsByUserId = async ({ userId }) => {
     throw new Error('No projects found for this user');
   }
 
-  return allUserProjects;
+  return { project: allUserProjects }; // Wrap the array in an object with a key `project`
 };
 
 // export const addUsersToProject = async ({ projectId, users, userId }) => {
