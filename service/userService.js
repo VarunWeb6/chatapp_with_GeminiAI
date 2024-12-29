@@ -14,3 +14,10 @@ export const createUser = async ({ email, password }) => {
 
   return user;
 };
+
+export const getAllUsers= async ({userId}) => {
+  const users = await dbmodels.find({
+    _id: { $ne: userId },
+  });
+  return users;
+}
