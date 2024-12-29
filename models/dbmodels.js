@@ -10,7 +10,6 @@ const userSchema = new mongoose.Schema({
         type : String,
         required : true,
         unique : true,
-        trim : true,
         lowercase : true,
         minLength : [6, 'email must be atleast 8 characters long'],
         maxLength : [20, "email can't exceed 15 characters long"]
@@ -37,6 +36,7 @@ userSchema.methods.generateJWT = function (){
         { expiresIn: '24h' })
 }
 
-const User = mongoose.model('user', userSchema)
+// const User = mongoose.model('user', userSchema)
+const User = mongoose.models.User || mongoose.model('User', userSchema);
 
 export default User;

@@ -9,11 +9,18 @@ export const createProject = async ({
     if(!userId){
         throw new Error('User id is required')
     }
-
-    const project = await projectModel.create({
-        name,
-        users:[userId]
-    })
+    let project;
+    try {
+        project = await projectModel.create({
+            name,
+            users: [userId]
+        });
+    } catch (error) {
+        if (error.code === 11000) { 
+            throw new Error('Project name already exists');
+        }
+        throw error;
+    }
 
     return project
 }
