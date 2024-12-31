@@ -5,6 +5,7 @@ import userRoutes from './routes/userRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
+import aiRoutes from './routes/aiRoutes.js'
 
 // Initialize Database Connection
 try {
@@ -32,6 +33,7 @@ app.use(cookieParser());
 // Routes
 app.use('/users', userRoutes);
 app.use('/projects', projectRoutes);
+app.use('/ai',aiRoutes)
 
 app.get('/', (req, res) => {
     res.json({ message: 'Welcome to the API!' });
