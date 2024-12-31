@@ -35,8 +35,8 @@ router.put('/add-user',
   )
   
 
-router.get('/get-project/:projectId', 
-    authMiddleWare.authUser,
-    projectController.getProjectById
-)
+  router.get('/get-project/:projectId',
+    authMiddleWare.authUser,  
+    projectController.getProjectById 
+);
 export default router;
