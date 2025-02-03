@@ -21,7 +21,7 @@ const app = express();
 // Middleware
 app.use(
     cors({
-        origin: 'http://localhost:5173', // Allow frontend URI
+        origin: '*', // Allow frontend URI
         credentials: true, // Enable credentials for cookie handling
     })
 );
